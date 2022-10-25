@@ -9,8 +9,8 @@ namespace ConsoleApp1
             // BenchmarkRunner.Run<LinqLoopBenchmarks>();
             // BenchmarkRunner.Run<NullEmptyValuesBenchmarks>();
             // BenchmarkRunner.Run<SplitCollectionsBenchmarks>();
-            // BenchmarkRunner.Run<StringVsStringBuilderBenchmarks>();
-            BenchmarkRunner.Run<StringSplitVsSpanBenchmarks>();
+            BenchmarkRunner.Run<StringVsStringBuilderBenchmarks>();
+            //BenchmarkRunner.Run<StringSplitVsSpanBenchmarks>();
             
         }
     }

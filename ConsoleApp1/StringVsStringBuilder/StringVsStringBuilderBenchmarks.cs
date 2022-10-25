@@ -19,10 +19,16 @@ namespace ConsoleApp1
         public string ConcatFewStringsWithStringBuilder() => Samples.ConcatStringsWithStringBuilder(Data);
 
         [Benchmark]
+        public string ConcatStringsWithStringJoin() => Samples.ConcatStringsWithStringJoin(Data);
+
+        [Benchmark]
         public string ConcatBigStringsWithString() => Samples.ConcatStringsWithString(Data100);
 
         [Benchmark]
         public string ConcatBigStringsWithStringBuilder() => Samples.ConcatStringsWithStringBuilder(Data100);
+        
+        [Benchmark]
+        public string ConcatBigStringsWithStringJoin() => Samples.ConcatStringsWithStringJoin(Data100);
         
         public static class Seed
         {
