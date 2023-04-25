@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
+using ConsoleApp1.FunctionVsPredicate;
 
 namespace ConsoleApp1
 {
@@ -9,9 +10,10 @@ namespace ConsoleApp1
             // BenchmarkRunner.Run<LinqLoopBenchmarks>();
             // BenchmarkRunner.Run<NullEmptyValuesBenchmarks>();
             // BenchmarkRunner.Run<SplitCollectionsBenchmarks>();
-            BenchmarkRunner.Run<StringVsStringBuilderBenchmarks>();
+            //BenchmarkRunner.Run<StringVsStringBuilderBenchmarks>();
             //BenchmarkRunner.Run<StringSplitVsSpanBenchmarks>();
-            
+            BenchmarkRunner.Run<FunctionVsPredicateBenchmark>();
+
         }
     }
 }

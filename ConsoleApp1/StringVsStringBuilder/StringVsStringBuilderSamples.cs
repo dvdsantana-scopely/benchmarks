@@ -29,6 +29,20 @@ namespace ConsoleApp1
             return result.ToString();
         }
         
+        public string ConcatStringsWithStringBuilder2(List<string> data)
+        {
+            var result = new StringBuilder();
+            
+            
+            
+            foreach (var s in data)
+            {
+                result.Append(s);
+            }
+
+            return result.ToString();
+        }
+        
         public string ConcatStringsWithStringJoin(List<string> data) => string.Join("", data);
     }
 }
