@@ -1,0 +1,20 @@
+name: Prune Old Branches
+on:
+  schedule:
+    # Run the job every Sunday at 2am
+    - cron: '0 2 * * 0'
+jobs:
+  delete-old-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get remote branches
+        run: git fetch --prune --unshallow
+      - name: Delete old branches
+        run: |
+          for branch in $(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "(^|/)develop(/|$)" | tr -d '[:space:]'); do
+            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '10 seconds ago' +%s)" ]]; then
+              echo ${branch#origin/}
+              # git push origin --delete ${branch#origin/}
+            fi
+          done
