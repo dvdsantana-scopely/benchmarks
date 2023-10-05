@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   
   schedule:
-    # Run the job every Sunday at 2am
-    - cron: '0 2 * * 0'
+    # Run the job at 00:00, on day 1 of the month.
+    - cron: '0 0 1 * *'
 jobs:
   delete-old-branches:
     runs-on: ubuntu-latest
