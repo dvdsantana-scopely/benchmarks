@@ -24,7 +24,7 @@ jobs:
           
           deleted_branches=""
           for branch in $branches; do
-            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '10 seconds ago' +%s)" ]]; then
+            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '3 months ago' +%s)" ]]; then
               #git push origin --delete ${branch#*/}
               deleted_branch=$(echo $branch | sed 's/[^\/]*\///g')
               deleted_branches="$deleted_branches $deleted_branch, "
