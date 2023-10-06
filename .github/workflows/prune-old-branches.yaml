@@ -17,7 +17,7 @@ jobs:
         run: |
           for branch in $(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "(^|/)develop(/|$)" | tr -d '[:space:]'); do
             if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '10 seconds ago' +%s)" ]]; then
-              echo "Deleting branch: ${branch#origin/}\n"
+              echo "Deleting branch: ${branch}\n"
               # git push origin --delete ${branch#origin/}
             fi
           done
