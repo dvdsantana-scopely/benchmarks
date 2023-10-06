@@ -17,7 +17,7 @@ jobs:
         id: delete-branches
         env:
           branches_to_keep: ${{ github.repository.BRANCHES_TO_KEEP }}
-          REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
+          REPOSITORY_VAR: ${{ vars.BRANCHES_TO_KEEP }}
         run: |
           branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "$(echo ${branches_to_keep} | tr ',' ' ')" | tr -d '[ ]')
           deleted_branches=""
