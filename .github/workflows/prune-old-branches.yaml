@@ -18,7 +18,7 @@ jobs:
         env:
           branches_to_keep: ${{ vars.BRANCHES_TO_KEEP }}
         run: |
-          branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "$(echo ${branches_to_keep} | tr ',' ' ')" | tr -d '[ ]')
+          branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "$(echo ${branches_to_keep} | tr ',' '\|')" | tr -d '[ ]')
           deleted_branches=""
           echo "Branches to keep: $branches_to_keep"
           echo " Test: $(echo ${branches_to_keep} | tr ',' ' ')"
