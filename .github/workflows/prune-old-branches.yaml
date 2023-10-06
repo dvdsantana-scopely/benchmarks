@@ -10,7 +10,7 @@ jobs:
   delete-old-branches:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Get remote branches
         run: git fetch --prune --unshallow
       - name: Delete old branches
@@ -18,15 +18,17 @@ jobs:
         env:
           branches_to_keep: ${{ vars.BRANCHES_TO_KEEP }}
         run: |
-          branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "$(echo ${branches_to_keep} | tr ',' '\|')" | tr -d '[ ]')
-          deleted_branches=""
           echo "Branches to keep: $branches_to_keep"
-          echo " Test: $(echo ${branches_to_keep} | tr ',' ' ')"
+          
+          branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "$(echo ${branches_to_keep} | tr ',' '\|')" | tr -d '[ ]')
+          
+          deleted_branches=""
           for branch in $branches; do
             if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '10 seconds ago' +%s)" ]]; then
               #git push origin --delete ${branch#*/}
               deleted_branch=$(echo $branch | sed 's/[^\/]*\///g')
-              deleted_branches="$deleted_branches $deleted_branch"
+              deleted_branches="$deleted_branches $deleted_branch, "
             fi
           done
+          
           echo "Deleted branches: $deleted_branches"
