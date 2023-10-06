@@ -15,9 +15,8 @@ jobs:
         run: git fetch --prune --unshallow
       - name: Delete old branches
         run: |
-          for branch in $(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | egrep -v "(^|/)develop(/|$)" | tr -d '[:space:]'); do
-            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '10 seconds ago' +%s)" ]]; then
-              echo "Deleting branch: ${branch}\n"
-              # git push origin --delete ${branch#origin/}
+          for branch in $(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | tr -d '[:space:]'); do
+            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '6 months ago' +%s)" ]]; then
+              git push origin --delete ${branch#origin/}
             fi
           done
