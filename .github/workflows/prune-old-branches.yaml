@@ -14,9 +14,15 @@ jobs:
       - name: Get remote branches
         run: git fetch --prune --unshallow
       - name: Delete old branches
+        id: delete-branches
         run: |
-          for branch in $(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | tr -d '[:space:]'); do
-            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '6 months ago' +%s)" ]]; then
-              git push origin --delete ${branch#origin/}
+          branches=$(git branch -r --merged | egrep -v "(^|/)HEAD(/|$)" | egrep -v "(^|/)master(/|$)" | egrep -v "(^|/)main(/|$)" | tr -d '[ ]')
+          deleted_branches=""
+          for branch in $branches; do
+            if [[ "$(git log -1 --format=%ct $branch)" < "$(date -d '1 second ago' +%s)" ]]; then
+              deleted_branch=$(echo $branch | sed 's/[^\/]*\///g')
+              git push origin --delete ${branch#*/}
+              deleted_branches="$deleted_branches $deleted_branch"
             fi
           done
+          echo "Deleted branches: $deleted_branches"
