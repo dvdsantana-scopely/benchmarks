@@ -16,7 +16,7 @@ namespace ConsoleApp1
             //BenchmarkRunner.Run<StringSplitVsSpanBenchmarks>();
             // BenchmarkRunner.Run<FunctionVsPredicateBenchmark>();
             //BenchmarkRunner.Run<TaskAwaitBenchmark>();
-            BenchmarkRunner.Run<IsNullOrEmptyVsWhitespaceBenchmarks>();
+            // BenchmarkRunner.Run<IsNullOrEmptyVsWhitespaceBenchmarks>();
 
         }
     }
