@@ -18,9 +18,7 @@ namespace ConsoleApp1
             foreach (var s in data)
             {
                 if (string.IsNullOrEmpty(s.Value))
-                {
                     continue;
-                }
 
                 s.Id.ToString();
             }
